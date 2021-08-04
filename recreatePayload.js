@@ -24,10 +24,8 @@ const remove = [
 /**
  *
  * @Object objeto utilizado no payload durante as requests
- *
- * @Array args array simples com os elementos de primeiro nivel
- *
- * @returns retorna um novo objeto sem os elementos inseridos no array
+ * @Array args array simples com os elementos de n niveis a serem removidos
+ * @returns retorna um novo objeto
  */
 const recreatePayload = (payload = {}, args = []) => {
   // cria um objeto vazio
@@ -41,7 +39,7 @@ const recreatePayload = (payload = {}, args = []) => {
     .filter((key) => !args.includes(key))
     .forEach((property) => {
       args.forEach((arg) => {
-        // verifica a existencia de um item correspondente no args de acordo com as property
+        // verifica a existência de um item correspondente no args de acordo com as properties
         if (arg.indexOf(property) !== -1) {
           //obtem o item que iremos remover no caso de um
           //payload apartir do segundo nivel
@@ -53,7 +51,7 @@ const recreatePayload = (payload = {}, args = []) => {
           ));
         }
       });
-      // retorna a nova properties do payload
+      // retorna a nova property do payload
       obj[property] = payload[property];
     });
   //retorna o novo objeto
